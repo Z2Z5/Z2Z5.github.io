@@ -1,858 +1,717 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Z2Z5 — Train Easy or Train Hard</title>
-  <meta name="description"
-    content="Z2Z5 strips fitness down to the two intensities that actually work: Zone 2 for building your aerobic engine, and Zone 5 for pushing your ceiling higher.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* ── Reset & Base ─────────────────────────── */
-    *,
-    *::before,
-    *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 70px;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-      background:
-        repeating-linear-gradient(135deg,
-          transparent,
-          transparent 60px,
-          rgba(74, 144, 217, 0.03) 60px,
-          rgba(74, 144, 217, 0.03) 62px),
-        repeating-linear-gradient(135deg,
-          transparent,
-          transparent 100px,
-          rgba(232, 93, 58, 0.025) 100px,
-          rgba(232, 93, 58, 0.025) 102px),
-        repeating-linear-gradient(135deg,
-          transparent,
-          transparent 160px,
-          rgba(130, 80, 220, 0.02) 160px,
-          rgba(130, 80, 220, 0.02) 162px),
-        #f8f9fa;
-      background-attachment: fixed;
-      color: #1a1a2e;
-      font-size: 1.1rem;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* ── Navbar ────────────────────────────────── */
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 clamp(1.5rem, 4vw, 3rem);
-      background: rgba(248, 249, 250, 0.8);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 3px solid transparent;
-      border-image:
-        repeating-linear-gradient(90deg,
-          #4A90D9 0px,
-          #4A90D9 20px,
-          #E85D3A 20px,
-          #E85D3A 40px,
-          #8250dc 40px,
-          #8250dc 60px,
-          #f59e0b 60px,
-          #f59e0b 80px) 1;
-      border-image-slice: 1;
-    }
-
-    .navbar-logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      background: linear-gradient(135deg, #4A90D9, #E85D3A);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .navbar-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .navbar-links a {
-      font-size: 0.95rem;
-      font-weight: 600;
-      opacity: 0.5;
-      transition: opacity 0.25s ease;
-    }
-
-    .navbar-links a:hover,
-    .navbar-links a:focus-visible,
-    .navbar-links a.active {
-      opacity: 1;
-    }
-
-    /* ── Hero ──────────────────────────────────── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 80px 1.5rem 60px;
-      position: relative;
-      background: #f8f9fa;
-      overflow: hidden;
-    }
-
-    /* Animated gradient blobs */
-    .hero::before,
-    .hero::after {
-      content: '';
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.4;
-      animation: float 8s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    .hero::before {
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(74, 144, 217, 0.35), transparent 70%);
-      top: 10%;
-      left: -5%;
-      animation-delay: 0s;
-    }
-
-    .hero::after {
-      width: 450px;
-      height: 450px;
-      background: radial-gradient(circle, rgba(232, 93, 58, 0.3), transparent 70%);
-      bottom: 10%;
-      right: -5%;
-      animation-delay: -4s;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translate(0, 0) scale(1);
-      }
-
-      33% {
-        transform: translate(30px, -20px) scale(1.05);
-      }
-
-      66% {
-        transform: translate(-20px, 15px) scale(0.95);
-      }
-    }
-
-    .hero h1 {
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.15;
-      max-width: 800px;
-      margin-bottom: 1.5rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero p {
-      max-width: 650px;
-      font-size: 1.05rem;
-      opacity: 0.6;
-      line-height: 1.8;
-      position: relative;
-      z-index: 1;
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2rem;
-      animation: bounce 2s ease infinite;
-      opacity: 0.3;
-      z-index: 1;
-    }
-
-    .scroll-indicator svg {
-      width: 28px;
-      height: 28px;
-      stroke: #1a1a2e;
-    }
-
-    @keyframes bounce {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(8px);
-      }
-    }
-
-    /* ── Sections ──────────────────────────────── */
-    .section {
-      padding: 100px 1.5rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      font-weight: 700;
-      margin-bottom: 1rem;
-      display: inline-block;
-    }
-
-    .section-header::after {
-      content: '';
-      display: block;
-      height: 4px;
-      margin-top: 0.5rem;
-      border-radius: 2px;
-      background:
-        repeating-linear-gradient(135deg,
-          #4A90D9 0px,
-          #4A90D9 6px,
-          #E85D3A 6px,
-          #E85D3A 12px,
-          #8250dc 12px,
-          #8250dc 18px,
-          #f59e0b 18px,
-          #f59e0b 24px);
-      opacity: 0.5;
-    }
-
-    .section-intro {
-      opacity: 0.6;
-      margin-bottom: 3rem;
-      max-width: 700px;
-    }
-
-    .section--header-only {
-      padding-bottom: 0;
-    }
-
-    .section-divider {
-      border: none;
-      height: 4px;
-      margin: 0 auto;
-      max-width: 900px;
-      background:
-        repeating-linear-gradient(135deg,
-          #4A90D9 0px,
-          #4A90D9 8px,
-          #E85D3A 8px,
-          #E85D3A 16px,
-          #8250dc 16px,
-          #8250dc 24px,
-          #f59e0b 24px,
-          #f59e0b 32px);
-      border-radius: 2px;
-      opacity: 0.25;
-    }
-
-    /* ── Zone Badge ────────────────────────────── */
-    .zone-badge {
-      display: inline-block;
-      padding: 4px 14px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #fff;
-      margin-bottom: 1rem;
-    }
-
-    .zone-badge--z2 {
-      background: #4A90D9;
-      box-shadow: 0 2px 12px rgba(74, 144, 217, 0.3);
-    }
-
-    .zone-badge--z5 {
-      background: #E85D3A;
-      box-shadow: 0 2px 12px rgba(232, 93, 58, 0.3);
-    }
-
-    /* ── Subsection ────────────────────────────── */
-    .subsection {
-      margin-bottom: 5rem;
-    }
-
-    .subsection-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-    }
-
-    .subsection-text {
-      max-width: 700px;
-      margin-bottom: 2rem;
-      color: #3a3a4a;
-    }
-
-    .subsection-text p {
-      margin-bottom: 1rem;
-    }
-
-    .subsection-text ol {
-      padding-left: 1.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .subsection-text ol li {
-      margin-bottom: 0.5rem;
-    }
-
-    /* ── Key Details Grid ─────────────────────── */
-    .details-grid {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0;
-      margin-bottom: 2.5rem;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      border-left: 4px solid #4A90D9;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.03);
-    }
-
-    .zone-badge--z5~.details-grid {
-      border-left-color: #E85D3A;
-    }
-
-    .details-grid .label,
-    .details-grid .value {
-      padding: 0.85rem 1.25rem;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .details-grid .label {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: #1a1a2e;
-      opacity: 0.45;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      white-space: nowrap;
-      border-right: 1px solid rgba(0, 0, 0, 0.05);
-      background: rgba(0, 0, 0, 0.015);
-    }
-
-    .details-grid .value {
-      font-size: 1rem;
-      color: #2a2a3a;
-    }
-
-    /* Remove bottom border from last row */
-    .details-grid> :nth-last-child(1),
-    .details-grid> :nth-last-child(2) {
-      border-bottom: none;
-    }
-
-    /* ── Images ────────────────────────────────── */
-    .section-image {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    /* ── Video Embed ───────────────────────────── */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* ── Summary Table ─────────────────────────── */
-    .summary-section {
-      padding: 80px 1.5rem 100px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .summary-section h2 {
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      font-weight: 700;
-      margin-bottom: 2rem;
-      text-align: center;
-    }
-
-    .summary-table-wrapper {
-      overflow-x: auto;
-      border-radius: 12px;
-      border: 1px solid rgba(0, 0, 0, 0.06);
-      background: #fff;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.03);
-    }
-
-    .summary-table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 500px;
-    }
-
-    .summary-table th,
-    .summary-table td {
-      padding: 1rem 1.25rem;
-      text-align: left;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    .summary-table thead th {
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      background: rgba(0, 0, 0, 0.015);
-    }
-
-    .summary-table thead th:nth-child(2) {
-      color: #3a7bc8;
-    }
-
-    .summary-table thead th:nth-child(3) {
-      color: #d14a28;
-    }
-
-    .summary-table tbody td {
-      color: #3a3a4a;
-    }
-
-    .summary-table tbody td:first-child {
-      font-weight: 600;
-      color: #1a1a2e;
-    }
-
-    .summary-table tbody tr:last-child td {
-      border-bottom: none;
-    }
-
-    /* ── Footer ────────────────────────────────── */
-    .footer {
-      text-align: center;
-      padding: 60px 1.5rem 80px;
-      border-top: 4px solid transparent;
-      border-image:
-        repeating-linear-gradient(90deg,
-          #4A90D9 0px,
-          #4A90D9 20px,
-          #E85D3A 20px,
-          #E85D3A 40px,
-          #8250dc 40px,
-          #8250dc 60px,
-          #f59e0b 60px,
-          #f59e0b 80px) 1;
-    }
-
-    .footer p {
-      opacity: 0.45;
-      font-size: 0.95rem;
-    }
-
-    .footer p:first-child {
-      font-weight: 600;
-      opacity: 0.65;
-      margin-bottom: 0.5rem;
-    }
-
-    .footer p:last-child {
-      font-size: 0.85rem;
-    }
-
-    /* ── Fade-in Animation ─────────────────────── */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── Responsive ────────────────────────────── */
-    @media (max-width: 600px) {
-      .section {
-        padding: 70px 1.25rem;
-      }
-
-      .details-grid .label,
-      .details-grid .value {
-        padding: 0.7rem 1rem;
-      }
-
-      .details-grid .label {
-        font-size: 0.8rem;
-      }
-
-      .navbar-links {
-        gap: 1.25rem;
-      }
-
-      .hero::before {
-        width: 300px;
-        height: 300px;
-      }
-
-      .hero::after {
-        width: 250px;
-        height: 250px;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .section {
-        padding: 120px 2rem;
-      }
-
-      .summary-section {
-        padding: 100px 2rem 120px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Z2Z5 — Train Easy or Train Hard</title>
+<meta name="description" content="Two intensities. That's all you need. Zone 2 builds the engine. Zone 5 raises the ceiling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --stone: #f0ede7;
+    --sand: #e6e2db;
+    --warm-white: #f7f5f1;
+    --parchment: #faf8f5;
+    --text: #2c2b28;
+    --text-mid: #5a5852;
+    --text-muted: #8a877f;
+    --text-faint: #b0ada6;
+    --rule: #d8d4cc;
+    --rule-light: #e8e5de;
+    --z2: #6b8f7b;
+    --z2-muted: #8aab98;
+    --z5: #b8705e;
+    --z5-muted: #c9917f;
+    --sans: 'Hanken Grotesk', system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--sans);
+    color: var(--text);
+    background: var(--parchment);
+    line-height: 1.75;
+    font-weight: 300;
+    font-size: 16px;
+  }
+
+  ::selection {
+    background: var(--z2);
+    color: var(--parchment);
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.5s, backdrop-filter 0.5s;
+  }
+
+  nav.scrolled {
+    background: rgba(250, 248, 245, 0.8);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+  }
+
+  .nav-mark {
+    font-size: 0.75rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 400;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 400;
+  }
+
+  .nav-links a:hover { color: var(--text-mid); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 3rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero-tagline {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 2rem;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeIn 1s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.35;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    opacity: 0;
+    animation: fadeIn 1s 0.4s forwards;
+  }
+
+  .hero h1 span {
+    color: var(--text-muted);
+  }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: var(--text-muted);
+    max-width: 420px;
+    opacity: 0;
+    animation: fadeIn 1s 0.6s forwards;
+  }
+
+  /* ─── GENERAL ─── */
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .section {
+    padding: 8rem 0;
+  }
+
+  .section-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--rule-light);
+    border: none;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-weight: 400;
+    margin-bottom: 3rem;
+    display: block;
+  }
+
+  h2 {
+    font-weight: 300;
+    font-size: 1.6rem;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.005em;
+  }
+
+  .intro-text {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 480px;
+    margin-bottom: 4rem;
+  }
+
+  /* ─── PRINCIPLE ─── */
+  .principle {
+    background: var(--stone);
+  }
+
+  .principle-text {
+    color: var(--text-mid);
+    font-size: 0.95rem;
+    max-width: 480px;
+    margin-bottom: 3rem;
+  }
+
+  .volume-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 400px;
+  }
+
+  .volume-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .volume-bar-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    width: 50px;
+    flex-shrink: 0;
+    font-weight: 400;
+  }
+
+  .volume-bar-track {
+    flex: 1;
+    height: 4px;
+    background: var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .volume-bar-fill {
+    height: 100%;
+    border-radius: 1px;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .volume-bar-fill.z2 { background: var(--z2); width: 90%; }
+  .volume-bar-fill.z5 { background: var(--z5); width: 10%; }
+  .volume-bar-fill.visible { transform: scaleX(1); }
+
+  .volume-bar-pct {
+    font-size: 0.8rem;
+    font-weight: 400;
+    width: 36px;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .volume-bar-pct.z2-pct { color: var(--z2); }
+  .volume-bar-pct.z5-pct { color: var(--z5); }
+
+  /* ─── ZONE BLOCKS ─── */
+  .zone-block {
+    margin-bottom: 6rem;
+  }
+
+  .zone-block:last-child { margin-bottom: 0; }
+
+  .zone-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+
+  .zone-tag.z2 { color: var(--z2); background: rgba(107, 143, 123, 0.1); padding: 0.3rem 0.7rem; border-radius: 2px; }
+  .zone-tag.z5 { color: var(--z5); background: rgba(184, 112, 94, 0.1); padding: 0.3rem 0.7rem; border-radius: 2px; }
+
+  .zone-tag::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .zone-block h3 {
+    font-weight: 300;
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.35;
+  }
+
+  .zone-block p {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+    line-height: 1.8;
+  }
+
+  .zone-block p:last-of-type { margin-bottom: 0; }
+
+  .callout {
+    margin-top: 1.5rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--z2);
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.75;
+  }
+
+  .callout.z5-callout {
+    border-left-color: var(--z5);
+  }
+
+  /* ─── PROTOCOL ─── */
+  .protocol {
+    margin: 1.5rem 0;
+    counter-reset: step;
+  }
+
+  .protocol-step {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    margin-bottom: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  .protocol-step::before {
+    counter-increment: step;
+    content: counter(step);
+    font-size: 0.85rem;
+    color: var(--z5);
+    flex-shrink: 0;
+    width: 1.2rem;
+    font-weight: 400;
+  }
+
+  .protocol-step strong {
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  /* ─── STATS ─── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0;
+    margin-top: 2rem;
+    border-top: 2px solid var(--z2);
+    border-left: 1px solid var(--rule-light);
+  }
+
+  .stats.z5-stats {
+    border-top-color: var(--z5);
+  }
+
+  .stat {
+    padding: 1rem;
+    border-bottom: 1px solid var(--rule-light);
+    border-right: 1px solid var(--rule-light);
+  }
+
+  .stat-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+  }
+
+  .stat-value {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  /* ─── IMAGE ─── */
+  .zone-img {
+    margin-top: 2rem;
+    overflow: hidden;
+    max-width: 320px;
+    border-left: 3px solid var(--z2);
+  }
+
+  .zone-img.z5-img {
+    border-left-color: var(--z5);
+  }
+
+  .zone-img img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(60%) contrast(0.95) brightness(1.02);
+    transition: filter 0.8s;
+  }
+
+  .zone-img:hover img {
+    filter: grayscale(20%) contrast(1) brightness(1);
+  }
+
+  /* ─── INNER RULE ─── */
+  .zone-rule {
+    width: 100%;
+    height: 1px;
+    background: var(--rule-light);
+    border: none;
+    margin: 5rem 0;
+    position: relative;
+  }
+
+  .zone-rule::after {
+    content: '';
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--z5);
+  }
+
+  /* ─── SUMMARY ─── */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+
+  .summary-table th {
+    text-align: left;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-weight: 400;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .summary-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--rule-light);
+    color: var(--text-mid);
+    line-height: 1.65;
+    vertical-align: top;
+  }
+
+  .summary-table td:first-child {
+    font-weight: 400;
+    color: var(--text);
+    width: 100px;
+  }
+
+  .summary-table tr:last-child td { border-bottom: none; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .footer-mark {
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    font-weight: 400;
+  }
+
+  footer p {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+  }
+
+  /* ─── ANIMATION ─── */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .hero { padding: 0 1.5rem; }
+    .wrap { padding: 0 1.5rem; }
+    .section { padding: 5rem 0; }
+    footer { padding: 2rem 1.5rem; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .nav-links { gap: 1.5rem; }
+    .zone-img { max-width: 100%; }
+  }
+</style>
 </head>
-
 <body>
 
-  <!-- ── Navigation ─────────────────────────── -->
-  <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <div class="navbar-logo">Z2Z5</div>
-    <ul class="navbar-links">
-      <li><a href="#running">Running</a></li>
-      <li><a href="#strength">Strength</a></li>
-    </ul>
-  </nav>
+<nav id="nav">
+  <a href="#" class="nav-mark">Z 2 Z 5</a>
+  <ul class="nav-links">
+    <li><a href="#running">Running</a></li>
+    <li><a href="#strength">Strength</a></li>
+  </ul>
+</nav>
 
-  <!-- ── Hero ───────────────────────────────── -->
-  <header class="hero">
-    <h1>Train Easy or Train Hard.<br>Nothing In Between.</h1>
-    <p>Z2Z5 strips fitness down to the two intensities that work: Zone 2 for building your aerobic engine, and Zone 5
-      for pushing your ceiling higher. Together they are amazing!</p>
-    <div class="scroll-indicator" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"></polyline>
-      </svg>
-    </div>
-  </header>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tagline">A training philosophy</div>
+  <h1>Train easy or train hard. <span>Nothing in between.</span></h1>
+  <p class="hero-sub">Two intensities. That's all you need. Zone 2 builds the engine. Zone 5 raises the ceiling.</p>
+  <div style="display:flex; gap:6px; margin-top:2.5rem; opacity:0; animation:fadeIn 1s 0.8s forwards;">
+    <div style="width:40px; height:2px; background:var(--z2); border-radius:1px;"></div>
+    <div style="width:8px; height:2px; background:var(--z5); border-radius:1px;"></div>
+  </div>
+</section>
 
-  <main>
+<div class="wrap"><hr class="section-rule"></div>
 
-    <!-- ════════════════════════════════════════ -->
-    <!-- ── Running ─────────────────────────── -->
-    <!-- ════════════════════════════════════════ -->
-    <section id="running" class="section section--header-only fade-in">
-      <h2 class="section-header">Running</h2>
-    </section>
-
-    <!-- Running — Zone 2 -->
-    <section class="section fade-in">
-      <article class="subsection">
-        <span class="zone-badge zone-badge--z2">Zone 2</span>
-        <h3 class="subsection-title">Build the Base</h3>
-        <div class="subsection-text">
-          <p>Zone 2 means keeping your heart rate in the 60–70% of max range for an extended session — typically around
-            60 minutes. You should be able to have a conversation with some difficulty; if you can't hold a sentence,
-            you're going too fast. For many people, this means walking portions of the run — and that's perfectly fine.
-            The goal is time in zone, not speed.</p>
-          <p>Zone 2 training builds mitochondrial density, improves fat oxidation, and creates the aerobic foundation
-            that everything else sits on.</p>
-        </div>
-
-        <div class="details-grid">
-          <div class="label">Duration</div>
-          <div class="value">~60 minutes</div>
-          <div class="label">Heart Rate</div>
-          <div class="value">60–70% of HRmax</div>
-          <div class="label">Volume</div>
-          <div class="value">Should be ~90% of your total training</div>
-          <div class="label">Rule of Thumb</div>
-          <div class="value">"If you have to breathe through your mouth, slow down."</div>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=800&q=80"
-          alt="Runner on a trail at sunrise with relaxed posture" class="section-image" loading="lazy">
-
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/gjYUWKFzGEo" title="Zone 2 running explained" loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        </div>
-      </article>
-    </section>
-
-    <hr class="section-divider">
-
-    <!-- Running — Zone 5 -->
-    <section class="section fade-in">
-      <article class="subsection">
-        <span class="zone-badge zone-badge--z5">Zone 5</span>
-        <h3 class="subsection-title">The Norwegian 4×4</h3>
-        <div class="subsection-text">
-          <p>The Norwegian 4×4 interval protocol was developed by exercise physiologists at the Norwegian University of
-            Science and Technology (NTNU). It is one of the most research-backed methods for increasing VO₂max — your
-            body's maximum oxygen uptake and the single best predictor of cardiovascular health.</p>
-          <p>The protocol is simple:</p>
-          <ol>
-            <li><strong>Warm-up:</strong> 10 minutes at an easy pace (60–70% HRmax / Zone 2)</li>
-            <li><strong>4 intervals</strong> of 4 minutes at high intensity (90–95% HRmax), each followed by 3 minutes
-              of active recovery (60–70% HRmax)</li>
-            <li><strong>Cool-down:</strong> 5 minutes easy</li>
-          </ol>
-          <p>Total session time: ~35 minutes. During the hard intervals you should be uncomfortable but controlled and
-            able to sustain the effort for the full 4 minutes.</p>
-          <p>Building up to it: start with fewer minutes at top speed. It's also normal that, to sustain all 4
-            intervals, you don't quite make it to Zone 5 in the first interval — that's OK.</p>
-        </div>
-
-        <div class="details-grid">
-          <div class="label">Session Length</div>
-          <div class="value">~35 minutes</div>
-          <div class="label">Work Intervals</div>
-          <div class="value">4 × 4 min at 90–95% HRmax</div>
-          <div class="label">Recovery</div>
-          <div class="value">3 min at 60–70% HRmax</div>
-          <div class="label">Frequency</div>
-          <div class="value">2–3 times per week</div>
-          <div class="label">Modality</div>
-          <div class="value">Running, cycling, rowing, or elliptical</div>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1461896836934-bd45ba48d26b?w=800&q=80"
-          alt="Sprinter mid-stride at high intensity" class="section-image" loading="lazy">
-
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/Uwp4E6O_yqM" title="Norwegian 4×4 protocol explained"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        </div>
-      </article>
-    </section>
-
-    <hr class="section-divider">
-
-    <!-- ════════════════════════════════════════ -->
-    <!-- ── Strength ────────────────────────── -->
-    <!-- ════════════════════════════════════════ -->
-    <section id="strength" class="section section--header-only fade-in">
-      <h2 class="section-header">Strength — Deadlift</h2>
-      <p class="section-intro">The deadlift works the entire posterior chain — glutes, hamstrings, lower back, traps,
-        grip — making it one of the most efficient full-body exercises. We use it for both Zone 2 and Zone 5.</p>
-    </section>
-
-    <!-- Strength — Zone 2 -->
-    <section class="section fade-in">
-      <article class="subsection">
-        <span class="zone-badge zone-badge--z2">Zone 2</span>
-        <h3 class="subsection-title">Light Deadlifts, Perfect Form</h3>
-        <div class="subsection-text">
-          <p>In the Zone 2 approach, the goal is volume with light-to-moderate weight. Pick a weight you can handle for
-            15+ reps with textbook form.</p>
-          <p>The focus here is movement quality: hinge at the hips, flat back, chest up, pull the slack out of the bar
-            before you lift. Every rep should look the same. This builds muscular endurance, reinforces motor patterns,
-            and keeps joints healthy.</p>
-          <p>A note on patience: Since the deadlift works so many parts of the body, you may hit temporary plateaus that
-            feel frustrating — like grip strength lagging behind everything else. Stick with the program. It builds the
-            entire chain harmoniously. The risk of trying to bypass a weak link is injury.</p>
-        </div>
-
-        <div class="details-grid">
-          <div class="label">Sets</div>
-          <div class="value">4–7</div>
-          <div class="label">Reps</div>
-          <div class="value">15+ per set (may decrease as sets progress)</div>
-          <div class="label">Weight</div>
-          <div class="value">Light to moderate (form must never break down)</div>
-          <div class="label">Rest</div>
-          <div class="value">60–90 seconds between sets</div>
-          <div class="label">Focus</div>
-          <div class="value">Hinge pattern, flat back, controlled tempo</div>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1534368786749-b63e05c92717?w=800&q=80"
-          alt="Athlete performing a deadlift with proper form" class="section-image" loading="lazy">
-
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/wYREQkVtvEc" title="Alan Thrall — How To Deadlift: 5-Step Setup"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        </div>
-      </article>
-    </section>
-
-    <hr class="section-divider">
-
-    <!-- Strength — Zone 5 -->
-    <section class="section fade-in">
-      <article class="subsection">
-        <span class="zone-badge zone-badge--z5">Zone 5</span>
-        <h3 class="subsection-title">Heavy Deadlifts, Low Reps</h3>
-        <div class="subsection-text">
-          <p>This is where you build raw strength. The session structure is 4–7 sets, ramping up in weight. The first
-            two sets serve as warm-ups at moderate intensity. From set 3 onward, the weight should be heavy enough that
-            you can only manage 1–3 reps per set. These are near-maximal pulls — controlled, braced, all-out.</p>
-          <p>Heavy deadlifts recruit maximal motor units, build bone density, strengthen connective tissue, and develop
-            the kind of functional strength that carries over to everything else.</p>
-        </div>
-
-        <div class="details-grid">
-          <div class="label">Sets</div>
-          <div class="value">4–7 total</div>
-          <div class="label">Sets 1–2</div>
-          <div class="value">Warm-up / moderate weight (5–8 reps)</div>
-          <div class="label">Sets 3+</div>
-          <div class="value">Heavy weight, 1–3 reps per set</div>
-          <div class="label">Rest</div>
-          <div class="value">3–5 minutes between heavy sets</div>
-          <div class="label">Focus</div>
-          <div class="value">Maximal effort, full bracing, controlled descent</div>
-        </div>
-
-        <img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=800&q=80"
-          alt="Heavy barbell loaded for deadlifts in a gym setting" class="section-image" loading="lazy">
-
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/r4MzxtBKyNE" title="Heavy deadlift programming explained"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
-        </div>
-      </article>
-    </section>
-
-    <hr class="section-divider">
-
-    <!-- ── Summary Table ───────────────────── -->
-    <section class="summary-section fade-in">
-      <h2>Summary</h2>
-      <div class="summary-table-wrapper">
-        <table class="summary-table">
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Zone 2 (90% of volume)</th>
-              <th>Zone 5 (5–10% of volume)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Running</td>
-              <td>60-min easy run (even walking is fine)</td>
-              <td>Norwegian 4×4 (4 × 4 min at 90–95% HRmax)</td>
-            </tr>
-            <tr>
-              <td>Strength</td>
-              <td>4–7 sets × 15+ rep deadlifts (form focus)</td>
-              <td>4–7 sets, ramping to 1–3 rep heavy deadlifts</td>
-            </tr>
-          </tbody>
-        </table>
+<!-- PRINCIPLE -->
+<section class="principle">
+  <div class="wrap section reveal">
+    <span class="section-label">The principle</span>
+    <h2>Most people train in the middle. It's the worst place to be.</h2>
+    <p class="principle-text">Zone 3 and Zone 4 feel productive. They're hard enough to hurt, easy enough to sustain. But they don't trigger the adaptations that matter. Zone 2 builds your mitochondrial base. Zone 5 pushes your VO₂max. Spend your time where the returns are.</p>
+    <div class="volume-bars">
+      <div class="volume-bar">
+        <span class="volume-bar-label">Zone 2</span>
+        <div class="volume-bar-track"><div class="volume-bar-fill z2"></div></div>
+        <span class="volume-bar-pct z2-pct">90%</span>
       </div>
-    </section>
+      <div class="volume-bar">
+        <span class="volume-bar-label">Zone 5</span>
+        <div class="volume-bar-track"><div class="volume-bar-fill z5"></div></div>
+        <span class="volume-bar-pct z5-pct">10%</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  </main>
+<div class="wrap"><hr class="section-rule"></div>
 
-  <!-- ── Footer ─────────────────────────────── -->
-  <footer class="footer">
-    <p>Z2Z5 — Train Easy or Train Hard.</p>
-    <p>Built with science. No fluff.</p>
-  </footer>
+<!-- RUNNING -->
+<section id="running">
+  <div class="wrap section">
 
-  <script>
-    // ── Scroll-triggered fade-in ────────────────
-    const fadeEls = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    fadeEls.forEach((el) => observer.observe(el));
+    <span class="section-label reveal">Running</span>
+    <h2 class="reveal">Sixty minutes easy. Sixteen minutes hard. That's the week.</h2>
+    <p class="intro-text reveal">The aerobic base does the heavy lifting. High-intensity intervals provide the stimulus. Both are non-negotiable.</p>
 
-    // ── Active nav link highlighting ────────────
-    const navLinks = document.querySelectorAll('.navbar-links a');
-    const sections = document.querySelectorAll('section[id]');
+    <!-- Z2 Running -->
+    <div class="zone-block reveal">
+      <span class="zone-tag z2">Zone 2</span>
+      <h3>Build the base</h3>
+      <p>Keep your heart rate at 60–70% of max for about 60 minutes. You should be able to hold a conversation, if only barely. If you can't finish a sentence, slow down.</p>
+      <p>For a lot of people, that means walking sections of the run. That's fine. The goal is time in zone, not pace. This is where you build mitochondrial density, improve fat oxidation, and lay the aerobic foundation everything else depends on.</p>
+      <div class="callout">If you have to breathe through your mouth, slow down.</div>
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Duration</div><div class="stat-value">~60 min</div></div>
+        <div class="stat"><div class="stat-label">Heart rate</div><div class="stat-value">60–70% HRmax</div></div>
+        <div class="stat"><div class="stat-label">Volume</div><div class="stat-value">~90% of total</div></div>
+        <div class="stat"><div class="stat-label">Intensity</div><div class="stat-value">Conversational</div></div>
+      </div>
+      <div class="zone-img">
+        <img src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=640&q=80" alt="Runner on a trail at sunrise" loading="lazy">
+      </div>
+    </div>
 
-    const navObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            navLinks.forEach((link) => {
-              link.classList.toggle(
-                'active',
-                link.getAttribute('href') === '#' + entry.target.id
-              );
-            });
-          }
-        });
-      },
-      { rootMargin: '-30% 0px -70% 0px' }
-    );
-    sections.forEach((section) => navObserver.observe(section));
-  </script>
+    <hr class="zone-rule">
+
+    <!-- Z5 Running -->
+    <div class="zone-block reveal">
+      <span class="zone-tag z5">Zone 5</span>
+      <h3>The Norwegian 4×4</h3>
+      <p>Developed by exercise physiologists at NTNU, the Norwegian 4×4 is one of the most evidence-backed protocols for increasing VO₂max — your body's ceiling for oxygen uptake and the single strongest predictor of cardiovascular health.</p>
+      <div class="protocol">
+        <div class="protocol-step"><span><strong>Warm-up:</strong> 10 minutes easy, 60–70% HRmax</span></div>
+        <div class="protocol-step"><span><strong>4 intervals</strong> of 4 minutes at 90–95% HRmax, each followed by 3 minutes active recovery</span></div>
+        <div class="protocol-step"><span><strong>Cool-down:</strong> 5 minutes easy</span></div>
+      </div>
+      <p>During the hard intervals, you should be uncomfortable but controlled. You need to sustain the effort for the full four minutes. Start with shorter intervals if you need to build up.</p>
+      <div class="stats z5-stats">
+        <div class="stat"><div class="stat-label">Session</div><div class="stat-value">~35 min</div></div>
+        <div class="stat"><div class="stat-label">Work</div><div class="stat-value">4 × 4 min</div></div>
+        <div class="stat"><div class="stat-label">Recovery</div><div class="stat-value">3 min</div></div>
+        <div class="stat"><div class="stat-label">Frequency</div><div class="stat-value">2–3× / week</div></div>
+        <div class="stat"><div class="stat-label">Modality</div><div class="stat-value">Run, bike, row</div></div>
+      </div>
+      <div class="zone-img z5-img">
+        <img src="https://images.unsplash.com/photo-1461896836934-bd45ba48d26b?w=640&q=80" alt="Runner at high intensity" loading="lazy">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap"><hr class="section-rule"></div>
+
+<!-- STRENGTH -->
+<section id="strength">
+  <div class="wrap section">
+
+    <span class="section-label reveal">Strength</span>
+    <h2 class="reveal">The deadlift</h2>
+    <p class="intro-text reveal">Glutes, hamstrings, lower back, traps, grip — the deadlift works the entire posterior chain in one movement. The same Z2/Z5 principle applies.</p>
+
+    <!-- Z2 Deadlift -->
+    <div class="zone-block reveal">
+      <span class="zone-tag z2">Zone 2</span>
+      <h3>Light weight, perfect form</h3>
+      <p>Pick a weight you can handle for 15+ reps with textbook form. Hinge at the hips, flat back, chest up, pull the slack out of the bar before you lift. Every rep should look identical.</p>
+      <p>This builds muscular endurance, reinforces motor patterns, and keeps your joints healthy. The goal is movement quality, not load.</p>
+      <div class="callout">The deadlift trains so many muscles that you'll hit temporary plateaus — grip strength lagging behind hip drive, for instance. Stay patient. The chain builds itself. The risk of bypassing a weak link is injury.</div>
+      <div class="stats">
+        <div class="stat"><div class="stat-label">Sets</div><div class="stat-value">4–7</div></div>
+        <div class="stat"><div class="stat-label">Reps</div><div class="stat-value">15+</div></div>
+        <div class="stat"><div class="stat-label">Rest</div><div class="stat-value">60–90 sec</div></div>
+        <div class="stat"><div class="stat-label">Focus</div><div class="stat-value">Form, tempo</div></div>
+      </div>
+      <div class="zone-img">
+        <img src="https://images.unsplash.com/photo-1534368786749-b63e05c92717?w=640&q=80" alt="Athlete performing a deadlift" loading="lazy">
+      </div>
+    </div>
+
+    <hr class="zone-rule">
+
+    <!-- Z5 Deadlift -->
+    <div class="zone-block reveal">
+      <span class="zone-tag z5">Zone 5</span>
+      <h3>Heavy pulls, low reps</h3>
+      <p>Raw strength work. Ramp up across 4–7 sets. The first two are warm-ups at moderate load, 5–8 reps. From set three onward, the bar should be heavy enough that 1–3 reps is all you can manage. Near-maximal pulls — controlled, braced, everything you've got.</p>
+      <p>Heavy deadlifts recruit maximal motor units, build bone density, strengthen connective tissue, and develop functional strength that transfers to everything else you do.</p>
+      <div class="stats z5-stats">
+        <div class="stat"><div class="stat-label">Sets</div><div class="stat-value">4–7</div></div>
+        <div class="stat"><div class="stat-label">Sets 1–2</div><div class="stat-value">5–8 reps</div></div>
+        <div class="stat"><div class="stat-label">Sets 3+</div><div class="stat-value">1–3 reps</div></div>
+        <div class="stat"><div class="stat-label">Rest</div><div class="stat-value">3–5 min</div></div>
+        <div class="stat"><div class="stat-label">Focus</div><div class="stat-value">Max effort</div></div>
+      </div>
+      <div class="zone-img z5-img">
+        <img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=640&q=80" alt="Heavy barbell in a gym" loading="lazy">
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="wrap"><hr class="section-rule"></div>
+
+<!-- SUMMARY -->
+<section>
+  <div class="wrap section">
+    <span class="section-label reveal">At a glance</span>
+    <h2 class="reveal">The program</h2>
+    <table class="summary-table reveal">
+      <thead>
+        <tr>
+          <th></th>
+          <th><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--z2);margin-right:6px;vertical-align:middle;"></span>Zone 2 — 90%</th>
+          <th><span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--z5);margin-right:6px;vertical-align:middle;"></span>Zone 5 — 10%</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Running</td>
+          <td>60-minute easy run at 60–70% HRmax. Walking is fine. Time in zone, not speed.</td>
+          <td>Norwegian 4×4. Four intervals of 4 min at 90–95% HRmax, 3-min recovery between each.</td>
+        </tr>
+        <tr>
+          <td>Strength</td>
+          <td>4–7 sets of 15+ rep deadlifts. Light weight, impeccable form, controlled tempo.</td>
+          <td>4–7 sets ramping to 1–3 rep near-maximal deadlifts. Full bracing, full effort.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="wrap"><hr class="section-rule"></div>
+
+<footer>
+  <div class="footer-mark">Z 2 Z 5</div>
+  <p>Built with science. No fluff.</p>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        entry.target.querySelectorAll('.volume-bar-fill').forEach(f => f.classList.add('visible'));
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 
 </body>
-
 </html>
