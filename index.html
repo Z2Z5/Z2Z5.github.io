@@ -374,44 +374,13 @@
     font-weight: 400;
   }
 
-  /* ─── IMAGE ─── */
-  .zone-img {
-    margin-top: 2rem;
-    overflow: hidden;
-    max-width: 320px;
-    border-left: 3px solid var(--z2);
-  }
-
-  .zone-img.z5-img {
-    border-left-color: var(--z5);
-  }
-
-  .zone-img img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    display: block;
-    filter: grayscale(60%) contrast(0.95) brightness(1.02);
-    transition: filter 0.8s;
-  }
-
-  .zone-img:hover img {
-    filter: grayscale(20%) contrast(1) brightness(1);
-  }
-
   /* ─── VIDEO ─── */
   .zone-video {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
-    max-width: 480px;
-    border-left: 3px solid var(--z2);
-  }
-
-  .zone-video.z5-video {
-    border-left-color: var(--z5);
   }
 
   .zone-video iframe {
@@ -527,7 +496,6 @@
     footer { padding: 2rem 1.5rem; }
     .stats { grid-template-columns: 1fr 1fr; }
     .nav-links { gap: 1.5rem; }
-    .zone-img { max-width: 100%; }
   }
 </style>
 </head>
@@ -600,11 +568,8 @@
         <div class="stat"><div class="stat-label">Volume</div><div class="stat-value">~90% of total</div></div>
         <div class="stat"><div class="stat-label">Intensity</div><div class="stat-value">Conversational</div></div>
       </div>
-      <div class="zone-img">
-        <img src="https://images.unsplash.com/photo-1571008887538-b36bb32f4571?w=640&q=80" alt="Runner on a trail at sunrise" loading="lazy">
-      </div>
       <div class="zone-video">
-        <iframe src="https://www.youtube.com/embed/gjYUWKFzGEo" title="Zone 2 running explained" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/lpG6pYEt7pQ" title="Zone 2 training for runners" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
 
@@ -628,10 +593,7 @@
         <div class="stat"><div class="stat-label">Frequency</div><div class="stat-value">2–3× / week</div></div>
         <div class="stat"><div class="stat-label">Modality</div><div class="stat-value">Run, bike, row</div></div>
       </div>
-      <div class="zone-img z5-img">
-        <img src="https://images.unsplash.com/photo-1461896836934-bd45ba48d26b?w=640&q=80" alt="Runner at high intensity" loading="lazy">
-      </div>
-      <div class="zone-video z5-video">
+      <div class="zone-video">
         <iframe src="https://www.youtube.com/embed/Uwp4E6O_yqM" title="Norwegian 4×4 protocol explained" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
@@ -662,9 +624,6 @@
         <div class="stat"><div class="stat-label">Rest</div><div class="stat-value">60–90 sec</div></div>
         <div class="stat"><div class="stat-label">Focus</div><div class="stat-value">Form, tempo</div></div>
       </div>
-      <div class="zone-img">
-        <img src="https://images.unsplash.com/photo-1534368786749-b63e05c92717?w=640&q=80" alt="Athlete performing a deadlift" loading="lazy">
-      </div>
       <div class="zone-video">
         <iframe src="https://www.youtube.com/embed/wYREQkVtvEc" title="How to deadlift — 5-step setup" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
@@ -685,10 +644,7 @@
         <div class="stat"><div class="stat-label">Rest</div><div class="stat-value">3–5 min</div></div>
         <div class="stat"><div class="stat-label">Focus</div><div class="stat-value">Max effort</div></div>
       </div>
-      <div class="zone-img z5-img">
-        <img src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=640&q=80" alt="Heavy barbell in a gym" loading="lazy">
-      </div>
-      <div class="zone-video z5-video">
+      <div class="zone-video">
         <iframe src="https://www.youtube.com/embed/r4MzxtBKyNE" title="Heavy deadlift programming" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
